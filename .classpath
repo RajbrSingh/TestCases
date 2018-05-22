@@ -6,8 +6,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/samimalik/eclipse-workspace/Tests/libraries/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="/Users/samimalik/eclipse-workspace/Tests/libraries/opencsv-2.3.jar"/>
-	<classpathentry kind="lib" path="/Users/samimalik/eclipse-workspace/Tests/libraries/selenium-server-standalone-3.12.0.jar"/>
+	<classpathentry kind="lib" path="libraries/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="libraries/opencsv-2.3.jar"/>
+	<classpathentry kind="lib" path="libraries/selenium-server-standalone-3.12.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
