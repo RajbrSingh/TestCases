@@ -18,12 +18,12 @@ public class Master {
 		//
 		//Creating new file for Logs 
 		//
-        FileHandler handler = new FileHandler("logs.log");
+        FileHandler handler = new FileHandler("Automated-tests.log");
         SimpleFormatter formatterTxt = new SimpleFormatter();
         handler.setFormatter(formatterTxt);
         Logger logger = Logger.getLogger("com.javacodegeeks.snippets.core");
         logger.addHandler(handler);
-        logger.info("Begining Test Script");
+        logger.info("Begining Test Script\n");
         
         //
 		// Initilizing Chromedriver
@@ -60,12 +60,12 @@ public class Master {
 						loginType=userValues[i][2];
 						country=userValues[i][3];
 						language=userValues[i][4];
-						logger.info("-----------------------------------");
+						logger.info("-----------------------------------\n");
 						userLogin.userLogin(driver, logger, username, password,loginType,country,language,baseURL);
 						try {
 						driver.findElement(By.cssSelector("li.userlogout")).click();
 						}catch(Exception e){
-							logger.warning("**Could not find logout button**");
+							logger.warning("\n**Could not find logout button**\n\n");
 						}
 		}
 		}finally {

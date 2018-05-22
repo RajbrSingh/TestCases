@@ -17,20 +17,20 @@ public class UserLogin {
 		// select login screen url as per the user location
 		if (country.equalsIgnoreCase("EU")) {
 			if (loginType.equalsIgnoreCase("Drupal")) {
-				logger.info("-----Login type: Drupal-----");
+				logger.info("-----Login type: Drupal-----\n");
 				url = baseURL + "/user/login?visitor=EU&destination=/en/node/86";
 				drupalLogin(logger, driver, username, password, url);
 			}
 		} else if (country.equalsIgnoreCase("CA")) {
 			if (loginType.equalsIgnoreCase("Okta")) {
-				logger.info("-----Login type: Okta-----");
+				logger.info("-----Login type: Okta-----\n");
 				url = baseURL + "/login-na-select.html";
 				oktaLogin_CA(logger, driver, username, password, url, language);
 			}
 		} else if (country.equalsIgnoreCase("NA")) {
 			if (loginType.equalsIgnoreCase("Okta")) {
-				logger.info("-----Login type: Okta-----");
-				url = baseURL + "/login-na.html";
+				logger.info("-----Login type: Okta-----\n");
+				url = baseURL + "/login-na.php";
 			}
 			oktaLogin_NA(logger, driver, username, password, url);
 		}
@@ -46,9 +46,9 @@ public class UserLogin {
 		try {
 			assertEquals(driver.findElement(By.cssSelector("div.messages--error div h2")).getText().toString(),
 					"Error message");
-			logger.warning("****Error from Drupal on Login:  "
+			logger.warning("\n****Error from Drupal on Login:  "
 					+ driver.findElement(By.cssSelector("div.messages--error div")).getText()
-					+ " Error from the following username:" + username + "****");
+					+ " \nError from the following username:" + username + "****\n");
 
 		} catch (Exception e) {
 			logger.info("User passed : " + username + "\n");
@@ -72,13 +72,13 @@ public class UserLogin {
 					.equalsIgnoreCase("Sign in failed!")) {
 				assertEquals(driver.findElement(By.cssSelector("div.okta-form-infobox-error p")).getText().toString(),
 						"Sign in failed!");
-				logger.warning("****Error From Okta on Login: "
+				logger.warning("\n****Error From Okta on Login: "
 						+ driver.findElement(By.cssSelector("div.okta-form-infobox-error p")).getText()
-						+ " Error from the following username:" + username + "****");
+						+ " \nError from the following username:" + username + "\n");
 				status = false;
 			}
 		} catch (Exception e) {
-			logger.info("User passed Okta : " + username + "\n");
+			logger.info("\nUser passed Okta : " + username + "\n");
 		}
 		if (status) {
 			try {
@@ -86,9 +86,9 @@ public class UserLogin {
 						"There is a problem with your Inner Circle user account. Contact the help desk for your area for assistance.")) {
 					assertEquals(driver.findElement(By.cssSelector("div#errorMessage p")).getText().toString(),
 							"There is a problem with your Inner Circle user account. Contact the help desk for your area for assistance.");
-					logger.warning("****Error From Drupal on Login: "
+					logger.warning("\n****Error From Drupal on Login: "
 							+ driver.findElement(By.cssSelector("div#errorMessage p")).getText()
-							+ " Error from the following username:" + username + "****");
+							+ " \nError from the following username:" + username + "\n");
 				}
 			} catch (Exception e) {
 				logger.info("User passed Drupal: " + username + "\n");
@@ -115,7 +115,7 @@ public class UserLogin {
 						"Sign in failed!");
 				logger.warning("\n****Error From Okta on Login: "
 						+ driver.findElement(By.cssSelector("div.okta-form-infobox-error p")).getText()
-						+ " Error from the following username:" + username + "****");
+						+ " \nError from the following username:" + username + "\n");
 				status = false;
 			}
 		} catch (Exception e) {
@@ -129,7 +129,7 @@ public class UserLogin {
 							"There is a problem with your Inner Circle user account. Contact the help desk for your area for assistance.");
 					logger.warning("\n****Error From Drupal on Login: "
 							+ driver.findElement(By.cssSelector("div#errorMessage p")).getText()
-							+ " Error from the following username:" + username + "****");
+							+ " \nError from the following username:" + username + "\n");
 				}
 			} catch (Exception e) {
 				logger.info("User passed Drupal: " + username + "\n");
