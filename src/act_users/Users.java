@@ -1,4 +1,4 @@
-package ACT_dev;
+package act_users;
 
 
 public class Users {

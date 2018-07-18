@@ -1,4 +1,4 @@
-package ACT_dev;
+package act_users;
 
 import static org.junit.Assert.assertEquals;
 import java.util.concurrent.TimeUnit;
@@ -9,36 +9,39 @@ import org.openqa.selenium.WebDriver;
 public class UserLogin {
 
 	// function called from Master class with all the user parameters
-	public void userLogin(WebDriver driver, Logger logger, String username, String password, String loginType,
+	public boolean userLogin(WebDriver driver, Logger logger, String username, String password, String loginType,
 			String country, String language, String baseURL) {
 
 		String url = baseURL;
+		boolean loginStatus=false;
 
 		// select login screen url as per the user location
 		if (country.equalsIgnoreCase("EU")) {
 			if (loginType.equalsIgnoreCase("Drupal")) {
 				logger.info("-----Login type: Drupal-----\n");
 				url = baseURL + "/user/login?visitor=EU&destination=/en/node/86";
-				drupalLogin(logger, driver, username, password, url);
+				loginStatus=drupalLogin(logger, driver, username, password, url);
 			}
 		} else if (country.equalsIgnoreCase("CA")) {
 			if (loginType.equalsIgnoreCase("Okta")) {
 				logger.info("-----Login type: Okta-----\n");
 				url = baseURL + "/login-na-select.html";
-				oktaLogin_CA(logger, driver, username, password, url, language);
+				loginStatus=oktaLogin_CA(logger, driver, username, password, url, language);
 			}
 		} else if (country.equalsIgnoreCase("NA")) {
 			if (loginType.equalsIgnoreCase("Okta")) {
 				logger.info("-----Login type: Okta-----\n");
 				url = baseURL + "/login-na.php";
 			}
-			oktaLogin_NA(logger, driver, username, password, url);
+			loginStatus=oktaLogin_NA(logger, driver, username, password, url);
 		}
+		return loginStatus;
 
 	}
 
 	// Drupal login - EU
-	public void drupalLogin(Logger logger, WebDriver driver, String username, String password, String url) {
+	public boolean drupalLogin(Logger logger, WebDriver driver, String username, String password, String url) {
+		boolean returnStatus=false;
 		driver.get(url);
 		driver.findElement(By.cssSelector("input#edit-name")).sendKeys(username);
 		driver.findElement(By.cssSelector("input#edit-pass")).sendKeys(password);
@@ -51,13 +54,16 @@ public class UserLogin {
 					+ " \nError from the following username:" + username + "****\n");
 
 		} catch (Exception e) {
-			logger.info("User passed : " + username + "\n");
+			logger.info("User login passed : " + username + "\n");
+			returnStatus=true;
 		}
+		return returnStatus;
 	}
 
 	// Okta login CA
-	public void oktaLogin_CA(Logger logger, WebDriver driver, String username, String password, String url,
+	public boolean oktaLogin_CA(Logger logger, WebDriver driver, String username, String password, String url,
 			String language) {
+		boolean returnStatus=false;
 		driver.get(url);
 		driver.findElement(By.cssSelector("button#button-" + language.toLowerCase())).click();
 		driver.findElement(By.cssSelector("button#okta-button")).click();
@@ -66,7 +72,7 @@ public class UserLogin {
 		driver.findElement(By.cssSelector("input#okta-signin-submit")).click();
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		boolean status = true;
-
+ 
 		try {
 			if (driver.findElement(By.cssSelector("div.okta-form-infobox-error p")).getText().toString()
 					.equalsIgnoreCase("Sign in failed!")) {
@@ -78,7 +84,8 @@ public class UserLogin {
 				status = false;
 			}
 		} catch (Exception e) {
-			logger.info("\nUser passed Okta : " + username + "\n");
+			logger.info("\nUser login passed Okta : " + username + "\n");
+			returnStatus=true;
 		}
 		if (status) {
 			try {
@@ -91,14 +98,16 @@ public class UserLogin {
 							+ " \nError from the following username:" + username + "\n");
 				}
 			} catch (Exception e) {
-				logger.info("User passed Drupal: " + username + "\n");
+				logger.info("User login passed Drupal: " + username + "\n");
+				returnStatus=true;
 			}
 		}
+		return returnStatus;
 
 	}
 
 	// Okta login NA
-	public void oktaLogin_NA(Logger logger, WebDriver driver, String username, String password, String url) {
+	public boolean oktaLogin_NA(Logger logger, WebDriver driver, String username, String password, String url) {
 		driver.get(url);
 		// driver.findElement(By.cssSelector("button#button-en")).click();
 		driver.findElement(By.cssSelector("button#okta-button")).click();
@@ -107,6 +116,7 @@ public class UserLogin {
 		driver.findElement(By.cssSelector("input#okta-signin-submit")).click();
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		boolean status = true;
+		boolean returnStatus=false;
 
 		try {
 			if (driver.findElement(By.cssSelector("div.okta-form-infobox-error p")).getText().toString()
@@ -119,7 +129,8 @@ public class UserLogin {
 				status = false;
 			}
 		} catch (Exception e) {
-			logger.info("User passed Okta : " + username + "\n");
+			logger.info("User login passed Okta : " + username + "\n");
+			returnStatus=true;
 		}
 		if (status) {
 			try {
@@ -132,9 +143,11 @@ public class UserLogin {
 							+ " \nError from the following username:" + username + "\n");
 				}
 			} catch (Exception e) {
-				logger.info("User passed Drupal: " + username + "\n");
+				logger.info("User login passed Drupal: " + username + "\n");
+				returnStatus=true;
 			}
 		}
+		return returnStatus;
 	}
 
 }

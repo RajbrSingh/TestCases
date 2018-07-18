@@ -1,4 +1,4 @@
-package ACT_dev;
+package act_users;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -32,7 +32,7 @@ public class ReadCSV {
 		beanStrategy.setColumnMapping(columnMapping);
 		
 		CsvToBean<Users> csvToBean = new CsvToBean<Users>();
-		CSVReader reader = new CSVReader(new FileReader("users.csv"));
+		CSVReader reader = new CSVReader(new FileReader("users-logout.csv"));
 		List<Users> emps = csvToBean.parse(beanStrategy, reader);
 		int noOfCol=5;
 		String[][] userValues=new String[emps.size()][noOfCol];

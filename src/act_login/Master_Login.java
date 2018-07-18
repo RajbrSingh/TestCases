@@ -1,4 +1,4 @@
-package ACT_dev;
+package act_login;
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
@@ -9,9 +9,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import act_users.ReadCSV;
+import act_users.UserLogin;
 
 
-public class Master {
+
+public class Master_Login {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
