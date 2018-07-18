@@ -87,9 +87,9 @@ public class Master_Logout {
 							}
 							
 							if(titleText.equalsIgnoreCase("Global Intranet") || titleText.equalsIgnoreCase("Intranet global")) {
-								logger.info("User logout passed: " + username + "\n");
+								logger.info("Drupal logout passed: " + username + "\n");
 							}else {
-								logger.info("User logout failed: " + username + "\n");
+								logger.info("Drupal logout failed: " + username + "\n");
 							}		
 						}
 						else if(loginType.equalsIgnoreCase("Okta")) {
@@ -105,6 +105,7 @@ public class Master_Logout {
 							}
 						
 							if(titleText.equalsIgnoreCase("Global Intranet") || titleText.equalsIgnoreCase("Intranet global")) {
+								logger.info("Drupal logout passed: " + username + "\n");
 								// implies user has logged out of Drupal
 								//then check for Okta logout
 								if (country.equalsIgnoreCase("CA") || country.equalsIgnoreCase("NA")) {
@@ -118,12 +119,15 @@ public class Master_Logout {
 										driver.findElement(By.cssSelector("button#okta-button")).click();
 										try {
 					                    assertEquals(driver.findElement(By.cssSelector("input#okta-signin-username")).getText().toString(),"");
-					                    logger.info("User logout passed: " + username + "\n");
+					                    logger.info("Okta logout passed: " + username + "\n");
 										}catch(Exception e) {
-											logger.info("User logout failed: " + username + "\n");
+											logger.info("Okta logout failed: " + username + "\n");
 										}
 								}		
-							}			
+							}else {
+								logger.info("Drupal logout failed: " + username + "\n");
+							}
+							
 						}
 					}catch(Exception e){
 							logger.warning("\n**Could not find logout button**\n\n");
