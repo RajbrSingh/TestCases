@@ -1,6 +1,5 @@
 package act_users;
 
-
 public class Users {
 
 	private String username;
@@ -8,8 +7,8 @@ public class Users {
 	private String loginType;
 	private String country;
 	private String language;
-	
-	
+	private String top3news;
+
 	public String getCountry() {
 		return country;
 	}
@@ -50,8 +49,16 @@ public class Users {
 		this.password = password;
 	}
 
+	public String getTop3news() {
+		return top3news;
+	}
+
+	public void setTop3news(String top3news) {
+		this.top3news = top3news;
+	}
+
 	@Override
-	public String toString(){
-		return "Username:"+username+",Password:"+password+",LoginType:"+loginType;
+	public String toString() {
+		return "Username:" + username + ",Password:" + password + ",LoginType:" + loginType;
 	}
 }
