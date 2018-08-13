@@ -8,6 +8,33 @@ public class Users {
 	private String country;
 	private String language;
 	private String top3news;
+	private String userLanguage;
+	private String languageTestPage;
+	private String mainMenu;
+
+	public String getMainMenu() {
+		return mainMenu;
+	}
+
+	public void setMainMenu(String mainMenu) {
+		this.mainMenu = mainMenu;
+	}
+
+	public String getUserLanguage() {
+		return userLanguage;
+	}
+
+	public void setUserLanguage(String userLanguage) {
+		this.userLanguage = userLanguage;
+	}
+
+	public String getLanguageTestPage() {
+		return languageTestPage;
+	}
+
+	public void setLanguageTestPage(String languageTestPage) {
+		this.languageTestPage = languageTestPage;
+	}
 
 	public String getCountry() {
 		return country;

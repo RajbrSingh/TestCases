@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import act_language.Language;
 import act_login.UserLogin;
 import act_logout.Logout;
 import act_news.News;
@@ -47,7 +48,10 @@ public class Master {
 			String country = "";
 			String language = "";
 			String top3news = "";
-			String env = "dev";
+			String userLanguage = "";
+			String languageTestPage = "";
+			String mainMenu = "";
+			String env = "stg";
 			String baseURL = "";
 
 			if (env.equals("dev")) {
@@ -70,24 +74,29 @@ public class Master {
 				country = userValues[i][3];
 				language = userValues[i][4];
 				top3news = userValues[i][5];
+				userLanguage = userValues[i][6];
+				languageTestPage = userValues[i][7];
+				mainMenu = userValues[i][8];
 				logger.info("-----------------------------------\n");
 				logger.info("------------" + username + "-------------\n");
 
 				// login
 				loginStatus = UserLogin.userLogin(driver, logger, username, password, loginType, country, language,
 						baseURL);
-
 				// for successful login
 				if (loginStatus) {
 					// Top 3 dashboard news
-					News.top3news(driver, logger, top3news);
+					 News.top3news(driver, logger, top3news);
+					 
+					// Language test
+					 Language.language(driver, logger, userLanguage, baseURL, languageTestPage, mainMenu);
 
 					// logout
-					Logout.logout(driver, logger, loginType, country, language, baseURL);
+					 Logout.logout(driver, logger, loginType, country, language, baseURL);
 				}
 			}
 		} finally {
-			driver.quit();
+			 driver.quit();
 		}
 	}
 
