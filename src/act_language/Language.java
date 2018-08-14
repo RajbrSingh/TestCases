@@ -24,24 +24,24 @@ public class Language {
 			String languageTestPage, String mainMenu) {
 
 		String url = driver.getCurrentUrl();
-		boolean flag = false, flag1 = false, flag2 = false;
+		boolean flag=false,flag1=false,flag2 = false;
 
 		// check if url has language same as user language
-		if (true) {
+		if ((baseURL + "/" + userLanguage).equalsIgnoreCase(url)) {
 			logger.info("Home page URL has same language as user language. " + "\n");
-
+			
 			flag = Menu.mainMenu(driver, logger, mainMenu, url);
 
 			// go to link in first main menu item and check the language in URL
 			driver.findElement(By.cssSelector("div.region-header nav.contextual-region > ul > li ")).click();
 			url = driver.getCurrentUrl();
 			if ((baseURL + "/" + userLanguage).equalsIgnoreCase(url)) {
-				logger.info("First menu item page URL has same language as user language. " + "\n");
-				flag1 = true;
-			} else {
+				logger.info("First menu item page URL has same language as user language. " + "\n");	
+				flag1=true;
+			}else {
 				logger.info("First menu item page URL don't have same language as user language. " + "\n");
 			}
-
+			
 			// go to node with language different than user language
 			driver.get(baseURL + "/" + languageTestPage);
 			flag = Menu.mainMenu(driver, logger, mainMenu, baseURL + "/" + languageTestPage);
