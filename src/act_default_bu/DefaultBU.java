@@ -26,7 +26,6 @@ public class DefaultBU {
         
 		//Link change in more button
 		String link=driver.findElement(By.cssSelector(".view--display-block_3 .more-link a")).getAttribute("href");
-        System.out.println(link);
 		if(link.endsWith(buID)) {
         	logger.info("More button in BU section changed to correct link " + "\n");
         	status2=true;
@@ -45,7 +44,7 @@ public class DefaultBU {
 		// Check BU news w.r.t. changed BU
 		status4 = checkBU(driver, logger, changeBU, expectedBUNews, true);
 
-		if (status1 && status2 && status3) {
+		if (status1 && status2 && status3 && status4) {
 			logger.info("BU news test: PASSED " + "\n");
 		} else {
 			logger.info("BU news test: FAILED " + "\n");
