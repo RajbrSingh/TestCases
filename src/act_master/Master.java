@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import act_default_bu.DefaultBU;
 import act_language.Language;
 import act_login.UserLogin;
 import act_logout.Logout;
@@ -53,6 +54,10 @@ public class Master {
 			String mainMenu = "";
 			String env = "stg";
 			String baseURL = "";
+			String defaultBU = "";
+			String BUNewsWithDefault = "";
+			String changeBU = "";
+			String expectedBUNews = "";
 
 			if (env.equals("dev")) {
 				baseURL = "https://innercircleglobal-dev.circlek.com";
@@ -77,21 +82,33 @@ public class Master {
 				userLanguage = userValues[i][6];
 				languageTestPage = userValues[i][7];
 				mainMenu = userValues[i][8];
+				defaultBU = userValues[i][9];
+				BUNewsWithDefault = userValues[i][10];
+				changeBU = userValues[i][11];
+				expectedBUNews = userValues[i][12];
 				logger.info("-----------------------------------\n");
 				logger.info("------------" + username + "-------------\n");
 
 				// login
+				 logger.info("*****LOGIN TEST***** " + "\n");
 				loginStatus = UserLogin.userLogin(driver, logger, username, password, loginType, country, language,
 						baseURL);
 				// for successful login
 				if (loginStatus) {
 					// Top 3 dashboard news
+					 logger.info("*****TOP 3 NEWS TEST***** " + "\n");
 					 News.top3news(driver, logger, top3news);
 					 
 					// Language test
-					 Language.language(driver, logger, userLanguage, baseURL, languageTestPage, mainMenu);
+					 logger.info("*****LANGUAGE TEST***** " + "\n");
+				     Language.language(driver, logger, userLanguage, baseURL, languageTestPage, mainMenu);
+					
+					//Default BU
+				     logger.info("*****BU NEWS TEST***** " + "\n");
+					DefaultBU.defaultBU(driver, logger, defaultBU, BUNewsWithDefault, changeBU, expectedBUNews);
 
 					// logout
+					 logger.info("*****LOGOUT TEST***** " + "\n");
 					 Logout.logout(driver, logger, loginType, country, language, baseURL);
 				}
 			}

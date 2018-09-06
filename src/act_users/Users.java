@@ -11,6 +11,43 @@ public class Users {
 	private String userLanguage;
 	private String languageTestPage;
 	private String mainMenu;
+	private String defaultBU;
+	private String BUNewsWithDefault;
+	private String changeBU;
+	private String expectedBUNews;
+	
+
+	public String getDefaultBU() {
+		return defaultBU;
+	}
+
+	public void setDefaultBU(String defaultBU) {
+		this.defaultBU = defaultBU;
+	}
+
+	public String getBUNewsWithDefault() {
+		return BUNewsWithDefault;
+	}
+
+	public void setBUNewsWithDefault(String bUNewsWithDefault) {
+		BUNewsWithDefault = bUNewsWithDefault;
+	}
+
+	public String getChangeBU() {
+		return changeBU;
+	}
+
+	public void setChangeBU(String changeBU) {
+		this.changeBU = changeBU;
+	}
+
+	public String getExpectedBUNews() {
+		return expectedBUNews;
+	}
+
+	public void setExpectedBUNews(String expectedBUNews) {
+		this.expectedBUNews = expectedBUNews;
+	}
 
 	public String getMainMenu() {
 		return mainMenu;

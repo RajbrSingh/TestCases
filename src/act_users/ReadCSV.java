@@ -33,12 +33,16 @@ public class ReadCSV {
 		columnMapping.put("UserLanguage", "UserLanguage");
 		columnMapping.put("LanguageTestPage", "LanguageTestPage");
 		columnMapping.put("MainMenu", "MainMenu");
+		columnMapping.put("DefaultBU", "DefaultBU");
+		columnMapping.put("BUNewsWithDefault", "BUNewsWithDefault");
+		columnMapping.put("ChangeBU", "ChangeBU");
+		columnMapping.put("ExpectedBUNews", "ExpectedBUNews");
 		beanStrategy.setColumnMapping(columnMapping);
 
 		CsvToBean<Users> csvToBean = new CsvToBean<Users>();
-		CSVReader reader = new CSVReader(new FileReader("users-language.csv"));
+		CSVReader reader = new CSVReader(new FileReader("users-BU-news.csv"));
 		List<Users> emps = csvToBean.parse(beanStrategy, reader);
-		int noOfCol = 9;
+		int noOfCol = 13;
 		String[][] userValues = new String[emps.size()][noOfCol];
 		for (int i = 0; i < emps.size(); i++) {
 			userValues[i][0] = emps.get(i).getUsername();
@@ -50,6 +54,10 @@ public class ReadCSV {
 			userValues[i][6] = emps.get(i).getUserLanguage();
 			userValues[i][7] = emps.get(i).getLanguageTestPage();
 			userValues[i][8] = emps.get(i).getMainMenu();
+			userValues[i][9] = emps.get(i).getDefaultBU();
+			userValues[i][10] = emps.get(i).getBUNewsWithDefault();
+			userValues[i][11] = emps.get(i).getChangeBU();
+			userValues[i][12] = emps.get(i).getExpectedBUNews();
 		}
 		return userValues;
 	}
