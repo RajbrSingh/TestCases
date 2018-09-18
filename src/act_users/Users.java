@@ -7,15 +7,68 @@ public class Users {
 	private String loginType;
 	private String country;
 	private String language;
+	private String role;
+	private String contentTypes;
+	private String reports;
 	private String top3news;
 	private String userLanguage;
 	private String languageTestPage;
 	private String mainMenu;
+	private String adminMenu;
 	private String defaultBU;
 	private String BUNewsWithDefault;
 	private String changeBU;
 	private String expectedBUNews;
-	
+	private String contentOutOfScope;
+	private String contentWithDiffRole;
+
+	public String getContentOutOfScope() {
+		return contentOutOfScope;
+	}
+
+	public void setContentOutOfScope(String contentOutOfScope) {
+		this.contentOutOfScope = contentOutOfScope;
+	}
+
+	public String getContentWithDiffRole() {
+		return contentWithDiffRole;
+	}
+
+	public void setContentWithDiffRole(String contentWithDiffRole) {
+		this.contentWithDiffRole = contentWithDiffRole;
+	}
+
+	public String getReports() {
+		return reports;
+	}
+
+	public void setReports(String reports) {
+		this.reports = reports;
+	}
+
+	public String getContentTypes() {
+		return contentTypes;
+	}
+
+	public void setContentTypes(String contentTypes) {
+		this.contentTypes = contentTypes;
+	}
+
+	public String getAdminMenu() {
+		return adminMenu;
+	}
+
+	public void setAdminMenu(String adminMenu) {
+		this.adminMenu = adminMenu;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public String getDefaultBU() {
 		return defaultBU;

@@ -23,17 +23,16 @@ public class DefaultBU {
 		String buID = changeBU(driver, logger, changeBU);
 		String url = driver.getCurrentUrl();
 		logger.info("BU dropdown changed to: " + changeBU + "\n");
-        
-		//Link change in more button
-		String link=driver.findElement(By.cssSelector(".view--display-block_3 .more-link a")).getAttribute("href");
-		if(link.endsWith(buID)) {
-        	logger.info("More button in BU section changed to correct link " + "\n");
-        	status2=true;
-        }else {
-        	logger.info("Link in BU section did not change to correct link " + "\n");
-        }
-		
-		
+
+		// Link change in more button
+		String link = driver.findElement(By.cssSelector(".view--display-block_3 .more-link a")).getAttribute("href");
+		if (link.endsWith(buID)) {
+			logger.info("More button in BU section changed to correct link " + "\n");
+			status2 = true;
+		} else {
+			logger.info("Link in BU section did not change to correct link " + "\n");
+		}
+
 		if (url.endsWith(buID)) {
 			logger.info("URL has changed BU's ID");
 			status3 = true;
