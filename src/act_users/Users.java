@@ -14,6 +14,8 @@ public class Users {
 	private String userLanguage;
 	private String languageTestPage;
 	private String mainMenu;
+	private String footerMenu;
+	private String sidebarMenu;
 	private String adminMenu;
 	private String defaultBU;
 	private String BUNewsWithDefault;
@@ -28,6 +30,22 @@ public class Users {
 
 	public void setContentOutOfScope(String contentOutOfScope) {
 		this.contentOutOfScope = contentOutOfScope;
+	}
+
+	public String getFooterMenu() {
+		return footerMenu;
+	}
+
+	public void setFooterMenu(String footerMenu) {
+		this.footerMenu = footerMenu;
+	}
+
+	public String getSidebarMenu() {
+		return sidebarMenu;
+	}
+
+	public void setSidebarMenu(String sidebarMenu) {
+		this.sidebarMenu = sidebarMenu;
 	}
 
 	public String getContentWithDiffRole() {

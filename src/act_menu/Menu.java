@@ -19,6 +19,23 @@ import act_users.ReadCSV;
 
 public class Menu {
 
+	public static void menu(WebDriver driver, Logger logger, String mainMenu, String footerMenu, String sidebarMenu,
+			String baseURL, String languageTestPage) {
+		driver.findElement(By.cssSelector("div.region-header .site-logo___image")).click();
+		boolean flag1 = mainMenu(driver, logger, mainMenu, baseURL);
+		boolean flag2 = sidebarMenu(driver, logger, sidebarMenu, baseURL);
+		boolean flag3 = footerMenu(driver, logger, footerMenu, baseURL);
+		driver.get(baseURL + "/" + languageTestPage);
+		boolean flag4 = mainMenu(driver, logger, mainMenu, baseURL + "/" + languageTestPage);
+		boolean flag5 = footerMenu(driver, logger, footerMenu, baseURL + "/" + languageTestPage);
+
+		if (flag1 && flag2 && flag3 && flag4 && flag5) {
+			logger.info("Menu test: PASSED" + "\n");
+		} else {
+			logger.info("Menu test: FAILED" + "\n");
+		}
+	}
+
 	public static boolean mainMenu(WebDriver driver, Logger logger, String mainMenu, String page) {
 		String menu = "";
 		Boolean flag = false;
@@ -43,6 +60,66 @@ public class Menu {
 			flag = true;
 		} else {
 			logger.info("Main menu for " + page + ": FAILED " + "\n");
+		}
+
+		return flag;
+
+	}
+
+	public static boolean sidebarMenu(WebDriver driver, Logger logger, String sidebarMenu, String page) {
+		String menu = "";
+		Boolean flag = false;
+
+		WebElement ulElement = driver.findElement(By.cssSelector("div.view--dashboard-links-view"));
+		List<WebElement> links = ulElement.findElements(By.tagName("a"));
+		for (int i = 0; i < links.size(); i++) {
+			String menuVal = links.get(i).getText();
+			if (menuVal.contains(",")) {
+				menuVal = menuVal.replaceAll(",", "@c");
+			}
+
+			if (i == links.size() - 1) {
+				menu = menu + menuVal;
+			} else {
+				menu = menu + menuVal + "/";
+			}
+		}
+		if (sidebarMenu.equals(menu)) {
+			logger.info("Sidebar menu for " + page + ": PASSED " + "\n");
+			flag = true;
+		} else {
+			logger.info("Sidebar menu for " + page + ": FAILED " + "\n");
+		}
+
+		return flag;
+
+	}
+
+	public static boolean footerMenu(WebDriver driver, Logger logger, String footerMenu, String page) {
+		String menu = "";
+		Boolean flag = false;
+
+		WebElement ulElement = driver
+				.findElement(By.cssSelector("div.region-footer nav.contextual-region ul.nav--main"));
+		List<WebElement> links = ulElement.findElements(By.tagName("a"));
+		for (int i = 0; i < links.size(); i++) {
+			String menuVal = links.get(i).getText();
+			if (menuVal.contains(",")) {
+				menuVal = menuVal.replaceAll(",", "@c");
+			}
+
+			if (i == links.size() - 1) {
+				menu = menu + menuVal;
+			} else {
+				menu = menu + menuVal + "/";
+			}
+		}
+
+		if (footerMenu.equals(menu)) {
+			logger.info("Footer menu for " + page + ": PASSED " + "\n");
+			flag = true;
+		} else {
+			logger.info("Footer menu for " + page + ": FAILED " + "\n");
 		}
 
 		return flag;

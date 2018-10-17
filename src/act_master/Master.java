@@ -16,6 +16,7 @@ import act_default_bu.DefaultBU;
 import act_language.Language;
 import act_login.UserLogin;
 import act_logout.Logout;
+import act_menu.Menu;
 import act_news.News;
 import act_roles.Roles;
 import act_users.ReadCSV;
@@ -56,6 +57,8 @@ public class Master {
 			String userLanguage = "";
 			String languageTestPage = "";
 			String mainMenu = "";
+			String footerMenu = "";
+			String sidebarMenu = "";
 			String adminMenu = "";
 			String env = "stg";
 			String baseURL = "";
@@ -92,13 +95,15 @@ public class Master {
 				userLanguage = userValues[i][9];
 				languageTestPage = userValues[i][10];
 				mainMenu = userValues[i][11];
-				adminMenu = userValues[i][12];
-				defaultBU = userValues[i][13];
-				BUNewsWithDefault = userValues[i][14];
-				changeBU = userValues[i][15];
-				expectedBUNews = userValues[i][16];
-				contentOutOfScope = userValues[i][17];
-				contentWithDiffRole = userValues[i][18];
+				footerMenu = userValues[i][12];
+				sidebarMenu = userValues[i][13];
+				adminMenu = userValues[i][14];
+				defaultBU = userValues[i][15];
+				BUNewsWithDefault = userValues[i][16];
+				changeBU = userValues[i][17];
+				expectedBUNews = userValues[i][18];
+				contentOutOfScope = userValues[i][19];
+				contentWithDiffRole = userValues[i][20];
 				logger.info("-----------------------------------\n");
 				logger.info("------------" + username + "-------------\n");
 
@@ -115,6 +120,10 @@ public class Master {
 					// Language test
 					logger.info("*****LANGUAGE TEST***** " + "\n");
 					Language.language(driver, logger, userLanguage, baseURL, languageTestPage, mainMenu);
+
+					// Menu test
+					logger.info("*****MENU TEST***** " + "\n");
+					Menu.menu(driver, logger, mainMenu, footerMenu, sidebarMenu, baseURL, languageTestPage);
 
 					// Default BU
 					logger.info("*****BU NEWS TEST***** " + "\n");
