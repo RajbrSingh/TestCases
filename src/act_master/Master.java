@@ -56,6 +56,7 @@ public class Master {
 			String top3news = "";
 			String userLanguage = "";
 			String languageTestPage = "";
+			String contentOnPage = "";
 			String mainMenu = "";
 			String footerMenu = "";
 			String sidebarMenu = "";
@@ -94,16 +95,17 @@ public class Master {
 				top3news = userValues[i][8];
 				userLanguage = userValues[i][9];
 				languageTestPage = userValues[i][10];
-				mainMenu = userValues[i][11];
-				footerMenu = userValues[i][12];
-				sidebarMenu = userValues[i][13];
-				adminMenu = userValues[i][14];
-				defaultBU = userValues[i][15];
-				BUNewsWithDefault = userValues[i][16];
-				changeBU = userValues[i][17];
-				expectedBUNews = userValues[i][18];
-				contentOutOfScope = userValues[i][19];
-				contentWithDiffRole = userValues[i][20];
+				contentOnPage = userValues[i][11];
+				mainMenu = userValues[i][12];
+				footerMenu = userValues[i][13];
+				sidebarMenu = userValues[i][14];
+				adminMenu = userValues[i][15];
+				defaultBU = userValues[i][16];
+				BUNewsWithDefault = userValues[i][17];
+				changeBU = userValues[i][18];
+				expectedBUNews = userValues[i][19];
+				contentOutOfScope = userValues[i][20];
+				contentWithDiffRole = userValues[i][21];
 				logger.info("-----------------------------------\n");
 				logger.info("------------" + username + "-------------\n");
 
@@ -111,6 +113,7 @@ public class Master {
 				logger.info("*****LOGIN TEST***** " + "\n");
 				loginStatus = UserLogin.userLogin(driver, logger, username, password, loginType, country, language,
 						baseURL);
+
 				// for successful login
 				if (loginStatus) {
 					// Top 3 dashboard news
@@ -119,7 +122,7 @@ public class Master {
 
 					// Language test
 					logger.info("*****LANGUAGE TEST***** " + "\n");
-					Language.language(driver, logger, userLanguage, baseURL, languageTestPage, mainMenu);
+					Language.language(driver, logger, userLanguage, baseURL, languageTestPage, contentOnPage, mainMenu);
 
 					// Menu test
 					logger.info("*****MENU TEST***** " + "\n");

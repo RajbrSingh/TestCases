@@ -133,26 +133,46 @@ public class Content {
 
 	}
 
-	public static boolean contentView(WebDriver driver, Logger logger, String baseURL, String var, String val) {
+	public static boolean contentView(WebDriver driver, Logger logger, String baseURL, String var, String val,
+			String contentOnPage) {
 		boolean flag = false;
-		driver.get(baseURL + val);
-		try {
-			String actualMessage = driver.findElement(By.cssSelector("div.region-content .block--main-page-content"))
-					.getText();
-			String message = "You are not authorized to access this page.";
+		driver.get(baseURL + "/" + val);
+		if (var.length() > 0) {
+			try {
+				String actualMessage = driver
+						.findElement(By.cssSelector("div.region-content .block--main-page-content")).getText();
+				String message = "You are not authorized to access this page.";
 
-			if (actualMessage.contains(message)) {
-				logger.info("User can't see content out of its " + var + ". \n");
-				flag = true;
-			} else {
-
+				if (actualMessage.contains(message)) {
+					logger.info("User can't see content out of its " + var + ". \n");
+					flag = true;
+				} else {
+					//
+				}
+			} catch (Exception e) {
+				logger.info("User can see content out of its " + var + ". \n");
 			}
-		} catch (Exception e) {
-			logger.info("User can see content out of its " + var + ". \n");
 		}
 
+		if (contentOnPage.length() > 0) {
+			String content_title = driver.findElement(By.cssSelector("div.layout-content article h2")).getText();
+			String content_body = driver
+					.findElement(By.cssSelector("div.layout-content article div.field--name-body span")).getText()
+					.trim();
+			if (content_title.contains(",")) {
+				content_title = content_title.replaceAll(",", "@c");
+			}
+			if (content_body.contains(",")) {
+				content_body = content_body.replaceAll(",", "@c");
+			}
+			if ((content_title.trim() + "/" + content_body.trim()).equals(contentOnPage)) {
+				logger.info("This page has content as expected. \n");
+				flag = true;
+			} else {
+				logger.info("This page doesnot have content as expected. \n");
+				flag = false;
+			}
+		}
 		return flag;
-
 	}
-
 }

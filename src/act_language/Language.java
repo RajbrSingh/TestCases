@@ -17,14 +17,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import act_login.UserLogin;
 import act_menu.Menu;
 import act_users.ReadCSV;
+import act_content.Content;
 
 public class Language {
 
 	public static void language(WebDriver driver, Logger logger, String userLanguage, String baseURL,
-			String languageTestPage, String mainMenu) {
+			String languageTestPage, String contentOnPage, String mainMenu) {
 
 		String url = driver.getCurrentUrl();
-		boolean flag = false, flag1 = false, flag2 = false;
+		boolean flag = false, flag1 = false, flag2 = false, flag3 = false;
 
 		// check if url has language same as user language
 		if ((baseURL + "/" + userLanguage).equalsIgnoreCase(url)) {
@@ -35,7 +36,7 @@ public class Language {
 			// go to link in first main menu item and check the language in URL
 			driver.findElement(By.cssSelector("div.region-header nav.contextual-region > ul > li ")).click();
 			url = driver.getCurrentUrl();
-			if ((baseURL + "/" + userLanguage).equalsIgnoreCase(url)) {
+			if (url.contains(baseURL + "/" + userLanguage.toLowerCase())) {
 				logger.info("First menu item page URL has same language as user language. " + "\n");
 				flag1 = true;
 			} else {
@@ -44,8 +45,9 @@ public class Language {
 
 			// go to node with language different than user language
 			driver.get(baseURL + "/" + languageTestPage);
-			flag = Menu.mainMenu(driver, logger, mainMenu, baseURL + "/" + languageTestPage);
-			if (flag && flag1 && flag2) {
+			flag2 = Menu.mainMenu(driver, logger, mainMenu, baseURL + "/" + languageTestPage);
+			flag3 = Content.contentView(driver, logger, baseURL, "", languageTestPage, contentOnPage);
+			if (flag && flag1 && flag2 && flag3) {
 				logger.info("Language Test: PASSED " + "\n");
 			} else {
 				logger.info("Language Test: FAILED " + "\n");

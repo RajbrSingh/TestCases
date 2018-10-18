@@ -25,6 +25,9 @@ public class News {
 					.findElement(
 							By.cssSelector(".view--dashboard-latest-3.view--display-block_1 .view__row  article  h3"))
 					.getText().toString();
+			if (top_news.contains(",")) {
+				top_news = top_news.replaceAll(",", "@c");
+			}
 		} catch (Exception e) {
 
 		}
@@ -34,6 +37,9 @@ public class News {
 					.findElement(By.cssSelector(
 							".view--dashboard-latest-3.view--display-block_2 .view__row:nth-child(1)  article  h3"))
 					.getText().toString();
+			if (top_news.contains(",")) {
+				top_news = top_news.replaceAll(",", "@c");
+			}
 		} catch (Exception e) {
 
 		}
@@ -43,6 +49,9 @@ public class News {
 					.findElement(By.cssSelector(
 							".view--dashboard-latest-3.view--display-block_2 .view__row:nth-child(2)  article  h3"))
 					.getText().toString();
+			if (top_news.contains(",")) {
+				top_news = top_news.replaceAll(",", "@c");
+			}
 		} catch (Exception e) {
 
 		}
@@ -64,7 +73,13 @@ public class News {
 		try {
 			bu_news = bu_news
 					+ driver.findElement(By.cssSelector(".view--display-block_3 .view__row  .field_title  h1"))
-							.getText().toString().trim();
+							.getText().toString().trim()
+					+ driver.findElement(By.cssSelector(".view--display-block_3 .view__row  .field_body  p")).getText()
+							.toString().trim();
+
+			if (bu_news.contains(",")) {
+				bu_news = bu_news.replaceAll(",", "@c");
+			}
 		} catch (Exception e) {
 
 		}
@@ -73,7 +88,13 @@ public class News {
 			bu_news = bu_news + "/";
 			bu_news = bu_news + driver
 					.findElement(By.cssSelector(".view--display-block_3 .view__row:nth-child(2)  .field_title  h1"))
-					.getText().toString();
+					.getText().toString()
+					+ driver.findElement(
+							By.cssSelector(".view--display-block_3 .view__row:nth-child(2)  .field_body  p")).getText()
+							.toString();
+			if (bu_news.contains(",")) {
+				bu_news = bu_news.replaceAll(",", "@c");
+			}
 		} catch (Exception e) {
 
 		}
@@ -81,12 +102,17 @@ public class News {
 			bu_news = bu_news + "/";
 			bu_news = bu_news + driver
 					.findElement(By.cssSelector(".view--display-block_3 .view__row:nth-child(3)  .field_title  h1"))
-					.getText().toString();
+					.getText().toString()
+					+ driver.findElement(
+							By.cssSelector(".view--display-block_3 .view__row:nth-child(3)  .field_body  p")).getText()
+							.toString();
+			if (bu_news.contains(",")) {
+				bu_news = bu_news.replaceAll(",", "@c");
+			}
 		} catch (Exception e) {
 
 		}
-		// System.out.println(bu_news);
-		// System.out.println(BUNewsWithDefault);
+
 		if (bu_news.equals(BUNewsWithDefault)) {
 			logger.info("BU news on Dashboard are with respect to the BU selected " + "\n");
 			status = true;

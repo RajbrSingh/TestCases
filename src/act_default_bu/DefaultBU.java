@@ -1,6 +1,7 @@
 package act_default_bu;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
@@ -74,13 +75,16 @@ public class DefaultBU {
 		String buID = "";
 		WebElement ulElement = driver.findElement(By.cssSelector("select.ViewsJumpMenu"));
 		List<WebElement> buValues = ulElement.findElements(By.tagName("option"));
+		int index = 0;
 		for (int i = 0; i < buValues.size(); i++) {
-			String bu = buValues.get(i).getText();
-			if (bu.trim().equals(changeBU)) {
-				buID = buValues.get(i).getAttribute("data-url");
-				buValues.get(i).click();
+			String bu = buValues.get(i).getText().trim();
+			if (bu.equalsIgnoreCase(changeBU)) {
+				index = i;
+				break;
 			}
 		}
+		buID = buValues.get(index).getAttribute("data-url");
+		buValues.get(index).click();
 		return buID;
 	}
 }

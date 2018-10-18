@@ -13,6 +13,7 @@ public class Users {
 	private String top3news;
 	private String userLanguage;
 	private String languageTestPage;
+	private String contentOnPage;
 	private String mainMenu;
 	private String footerMenu;
 	private String sidebarMenu;
@@ -30,6 +31,14 @@ public class Users {
 
 	public void setContentOutOfScope(String contentOutOfScope) {
 		this.contentOutOfScope = contentOutOfScope;
+	}
+
+	public String getContentOnPage() {
+		return contentOnPage;
+	}
+
+	public void setContentOnPage(String contentOnPage) {
+		this.contentOnPage = contentOnPage;
 	}
 
 	public String getFooterMenu() {

@@ -35,6 +35,7 @@ public class ReadCSV {
 		columnMapping.put("Top3news", "Top3news");
 		columnMapping.put("UserLanguage", "UserLanguage");
 		columnMapping.put("LanguageTestPage", "LanguageTestPage");
+		columnMapping.put("ContentOnPage", "ContentOnPage");
 		columnMapping.put("MainMenu", "MainMenu");
 		columnMapping.put("FooterMenu", "FooterMenu");
 		columnMapping.put("SidebarMenu", "SidebarMenu");
@@ -50,7 +51,7 @@ public class ReadCSV {
 		CsvToBean<Users> csvToBean = new CsvToBean<Users>();
 		CSVReader reader = new CSVReader(new FileReader("users-test.csv"));
 		List<Users> emps = csvToBean.parse(beanStrategy, reader);
-		int noOfCol = 21;
+		int noOfCol = 22;
 		String[][] userValues = new String[emps.size()][noOfCol];
 		for (int i = 0; i < emps.size(); i++) {
 			userValues[i][0] = emps.get(i).getUsername();
@@ -64,16 +65,17 @@ public class ReadCSV {
 			userValues[i][8] = emps.get(i).getTop3news();
 			userValues[i][9] = emps.get(i).getUserLanguage();
 			userValues[i][10] = emps.get(i).getLanguageTestPage();
-			userValues[i][11] = emps.get(i).getMainMenu();
-			userValues[i][12] = emps.get(i).getFooterMenu();
-			userValues[i][13] = emps.get(i).getSidebarMenu();
-			userValues[i][14] = emps.get(i).getAdminMenu();
-			userValues[i][15] = emps.get(i).getDefaultBU();
-			userValues[i][16] = emps.get(i).getBUNewsWithDefault();
-			userValues[i][17] = emps.get(i).getChangeBU();
-			userValues[i][18] = emps.get(i).getExpectedBUNews();
-			userValues[i][19] = emps.get(i).getContentOutOfScope();
-			userValues[i][20] = emps.get(i).getContentWithDiffRole();
+			userValues[i][11] = emps.get(i).getContentOnPage();
+			userValues[i][12] = emps.get(i).getMainMenu();
+			userValues[i][13] = emps.get(i).getFooterMenu();
+			userValues[i][14] = emps.get(i).getSidebarMenu();
+			userValues[i][15] = emps.get(i).getAdminMenu();
+			userValues[i][16] = emps.get(i).getDefaultBU();
+			userValues[i][17] = emps.get(i).getBUNewsWithDefault();
+			userValues[i][18] = emps.get(i).getChangeBU();
+			userValues[i][19] = emps.get(i).getExpectedBUNews();
+			userValues[i][20] = emps.get(i).getContentOutOfScope();
+			userValues[i][21] = emps.get(i).getContentWithDiffRole();
 		}
 		return userValues;
 	}

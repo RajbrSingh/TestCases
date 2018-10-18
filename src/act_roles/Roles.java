@@ -31,10 +31,10 @@ public class Roles {
 		flag4 = Content.create(driver, logger, baseURL);
 
 		// view content with Diff scope
-		flag5 = Content.contentView(driver, logger, baseURL, "Scope", contentOutOfScope);
+		flag5 = Content.contentView(driver, logger, baseURL, "Scope", contentOutOfScope,"");
 
 		// view content with Diff Role
-		flag6 = Content.contentView(driver, logger, baseURL, "Role", contentWithDiffRole);
+		flag6 = Content.contentView(driver, logger, baseURL, "Role", contentWithDiffRole, "");
 
 		if (flag && flag1 && flag2 && flag3 && flag4 && flag5 && flag6) {
 			logger.info("User role test: PASSED " + "\n");

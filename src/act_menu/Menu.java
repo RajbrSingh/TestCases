@@ -84,6 +84,7 @@ public class Menu {
 				menu = menu + menuVal + "/";
 			}
 		}
+
 		if (sidebarMenu.equals(menu)) {
 			logger.info("Sidebar menu for " + page + ": PASSED " + "\n");
 			flag = true;
