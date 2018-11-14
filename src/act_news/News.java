@@ -56,7 +56,7 @@ public class News {
 
 		}
 
-		// System.out.println(top_news);
+		 System.out.println("Top news : "+top_news);
 		// System.out.println(top3news);
 		if (top_news.equals(top3news)) {
 			logger.info("Top 3 dashboard news test: PASSED " + "\n");
@@ -112,6 +112,7 @@ public class News {
 		} catch (Exception e) {
 
 		}
+		System.out.println("BU news : "+bu_news);
 
 		if (bu_news.equals(BUNewsWithDefault)) {
 			logger.info("BU news on Dashboard are with respect to the BU selected " + "\n");

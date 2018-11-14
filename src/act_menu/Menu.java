@@ -22,12 +22,33 @@ public class Menu {
 	public static void menu(WebDriver driver, Logger logger, String mainMenu, String footerMenu, String sidebarMenu,
 			String baseURL, String languageTestPage) {
 		driver.findElement(By.cssSelector("div.region-header .site-logo___image")).click();
-		boolean flag1 = mainMenu(driver, logger, mainMenu, baseURL);
+		boolean flag1=false;
+		boolean flag3 =false;
+		boolean flag4 =false;
+		boolean flag5 = false;
+		try {
+			 flag1 = mainMenu(driver, logger, mainMenu, baseURL);
+		}catch(Exception e) {
+			logger.info("Main menu could not be found.");
+		}
+		
 		boolean flag2 = sidebarMenu(driver, logger, sidebarMenu, baseURL);
-		boolean flag3 = footerMenu(driver, logger, footerMenu, baseURL);
+		try {
+		 flag3 = footerMenu(driver, logger, footerMenu, baseURL);
+		}catch(Exception e) {
+			logger.info("Footer menu could not be found.");
+		}
 		driver.get(baseURL + "/" + languageTestPage);
-		boolean flag4 = mainMenu(driver, logger, mainMenu, baseURL + "/" + languageTestPage);
-		boolean flag5 = footerMenu(driver, logger, footerMenu, baseURL + "/" + languageTestPage);
+		try {
+		 flag4 = mainMenu(driver, logger, mainMenu, baseURL + "/" + languageTestPage);
+		}catch(Exception e) {
+			logger.info("Main menu could not be found.");
+		}
+		try {
+		 flag5 = footerMenu(driver, logger, footerMenu, baseURL + "/" + languageTestPage);
+		}catch(Exception e) {
+			logger.info("Footer menu could not be found.");
+		}
 
 		if (flag1 && flag2 && flag3 && flag4 && flag5) {
 			logger.info("Menu test: PASSED" + "\n");
@@ -39,8 +60,8 @@ public class Menu {
 	public static boolean mainMenu(WebDriver driver, Logger logger, String mainMenu, String page) {
 		String menu = "";
 		Boolean flag = false;
-
-		WebElement ulElement = driver.findElement(By.cssSelector("div.region-header nav.contextual-region > ul"));
+	//	driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		WebElement ulElement = driver.findElement(By.cssSelector("div.region-header ul.nav--main"));
 		List<WebElement> links = ulElement.findElements(By.tagName("li"));
 		for (int i = 0; i < links.size(); i++) {
 			String menuVal = links.get(i).getText();
@@ -54,7 +75,7 @@ public class Menu {
 				menu = menu + menuVal + "/";
 			}
 		}
-
+         System.out.println("Main menu : "+menu);
 		if (mainMenu.equals(menu)) {
 			logger.info("Main menu for " + page + ": PASSED " + "\n");
 			flag = true;
@@ -84,7 +105,7 @@ public class Menu {
 				menu = menu + menuVal + "/";
 			}
 		}
-
+    System.out.println("Sidebar menu : "+menu);
 		if (sidebarMenu.equals(menu)) {
 			logger.info("Sidebar menu for " + page + ": PASSED " + "\n");
 			flag = true;
@@ -101,7 +122,7 @@ public class Menu {
 		Boolean flag = false;
 
 		WebElement ulElement = driver
-				.findElement(By.cssSelector("div.region-footer nav.contextual-region ul.nav--main"));
+				.findElement(By.cssSelector("div.region-footer ul.nav--main"));
 		List<WebElement> links = ulElement.findElements(By.tagName("a"));
 		for (int i = 0; i < links.size(); i++) {
 			String menuVal = links.get(i).getText();
@@ -115,7 +136,7 @@ public class Menu {
 				menu = menu + menuVal + "/";
 			}
 		}
-
+		 System.out.println("Footer menu : "+menu);
 		if (footerMenu.equals(menu)) {
 			logger.info("Footer menu for " + page + ": PASSED " + "\n");
 			flag = true;
@@ -145,7 +166,7 @@ public class Menu {
 				menu = menu + menuVal + "/";
 			}
 		}
-
+		System.out.println("Admin menu : "+menu);
 		if (adminMenu.equals(menu)) {
 			logger.info("Admin menu : PASSED " + "\n");
 			flag = true;
@@ -176,6 +197,7 @@ public class Menu {
 				list = list + report + "/";
 			}
 		}
+		System.out.println("Reports available : "+list);
 		if (reports.equalsIgnoreCase(list)) {
 			logger.info("Publisher has correct available reports. \n");
 			flag = true;

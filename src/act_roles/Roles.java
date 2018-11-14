@@ -16,19 +16,38 @@ public class Roles {
 		// UserProfile.roles(driver, logger, role);
 
 		// Test Admin menu
+		try {
 		flag = Menu.adminMenu(driver, logger, adminMenu);
-
+		}catch(Exception e) {
+			logger.info("No admin menu");
+		}
 		// Test main menu
+		try {
 		flag1 = Menu.mainMenu(driver, logger, mainMenu, baseURL);
+	}catch(Exception e) {
+		logger.info("No main menu");
+	}
 
 		// available content types
+		try {
 		flag2 = Content.types(driver, logger, contentTypes, baseURL);
+		}catch(Exception e) {
+			logger.info("No Content types");
+		}
 
 		// available reports
+		try {
 		flag3 = Menu.availReports(driver, logger, reports, baseURL);
+	}catch(Exception e) {
+		logger.info("No report available");
+	}
 
 		// create a content and check its been created successfully
+		try {
 		flag4 = Content.create(driver, logger, baseURL);
+		}catch(Exception e) {
+			logger.info("Can't create content");
+		}
 
 		// view content with Diff scope
 		flag5 = Content.contentView(driver, logger, baseURL, "Scope", contentOutOfScope,"");
@@ -43,11 +62,5 @@ public class Roles {
 		}
 
 	}
-
-	// check the role
-
-	// create a content
-
-	// edit some content
 
 }

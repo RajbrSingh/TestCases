@@ -76,6 +76,8 @@ public class Master {
 				baseURL = "https://innercircleglobal-stg.circlek.com";
 			} else if (env.equals("prod")) {
 				baseURL = "https://innercircleglobal.circlek.com";
+			} else if (env.equals("testing")) {
+				baseURL = "https://couchetardtesting.prod.acquia-sites.com";
 			}
 
 			ReadCSV readCSV = new ReadCSV();

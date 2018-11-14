@@ -23,19 +23,23 @@ public class Language {
 
 	public static void language(WebDriver driver, Logger logger, String userLanguage, String baseURL,
 			String languageTestPage, String contentOnPage, String mainMenu) {
+		driver.findElement(By.cssSelector("div.region-header .site-logo___image")).click();
 
 		String url = driver.getCurrentUrl();
 		boolean flag = false, flag1 = false, flag2 = false, flag3 = false;
 
 		// check if url has language same as user language
+		System.out.println("Home page url : "+url);
 		if ((baseURL + "/" + userLanguage).equalsIgnoreCase(url)) {
 			logger.info("Home page URL has same language as user language. " + "\n");
 
 			flag = Menu.mainMenu(driver, logger, mainMenu, url);
 
 			// go to link in first main menu item and check the language in URL
-			driver.findElement(By.cssSelector("div.region-header nav.contextual-region > ul > li ")).click();
+			driver.findElement(By.cssSelector("div.region-header nav > ul > li ")).click();
 			url = driver.getCurrentUrl();
+			System.out.println("First menu page url : "+url);
+		
 			if (url.contains(baseURL + "/" + userLanguage.toLowerCase())) {
 				logger.info("First menu item page URL has same language as user language. " + "\n");
 				flag1 = true;
