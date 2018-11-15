@@ -56,9 +56,9 @@ public class Roles {
 		flag6 = Content.contentView(driver, logger, baseURL, "Role", contentWithDiffRole, "");
 
 		if (flag && flag1 && flag2 && flag3 && flag4 && flag5 && flag6) {
-			logger.info("User role test: PASSED " + "\n");
+	//		logger.info("User role test: PASSED " + "\n");
 		} else {
-			logger.info("User role test: FAILED " + "\n");
+	//		logger.info("User role test: FAILED " + "\n");
 		}
 
 	}
