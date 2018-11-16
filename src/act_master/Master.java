@@ -3,6 +3,8 @@ package act_master;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -28,7 +30,10 @@ public class Master {
 		//
 		// Creating new file for Logs
 		//
-		FileHandler handler = new FileHandler("Automated-tests.log");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		String fileName="Automated-tests-"+sdf.format(timestamp)+".log";
+		FileHandler handler = new FileHandler(fileName);
 		SimpleFormatter formatterTxt = new SimpleFormatter();
 		handler.setFormatter(formatterTxt);
 		Logger logger = Logger.getLogger("com.javacodegeeks.snippets.core");
@@ -138,7 +143,7 @@ public class Master {
 					logger.info("*****Roles TEST***** " + "\n");
 					logger.info("<<<<<" + role + ">>>>> " + "\n");
 					Roles.role(driver, logger, baseURL, role, contentTypes, reports, mainMenu, adminMenu,
-							contentOutOfScope, contentWithDiffRole);
+						contentOutOfScope, contentWithDiffRole);
 
 					// logout
 					logger.info("*****LOGOUT TEST***** " + "\n");
