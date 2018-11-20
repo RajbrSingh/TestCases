@@ -116,11 +116,14 @@ public class Master {
 				logger.info("-----------------------------------\n");
 				logger.info("------------" + username + "-------------\n");
 
+				
+				try {
+				
 				// login
 				logger.info("*****LOGIN TEST***** " + "\n");
 				loginStatus = UserLogin.userLogin(driver, logger, username, password, loginType, country, language,
 						baseURL);
-
+               
 				// for successful login
 				if (loginStatus) {
 					// Top 3 dashboard news
@@ -148,9 +151,15 @@ public class Master {
 					// logout
 					logger.info("*****LOGOUT TEST***** " + "\n");
 					Logout.logout(driver, logger, loginType, country, language, baseURL);
+				}}
+				
+				catch(Exception e) {
+					//logger.info("For user : "+username +"-> Error : "+e.toString());
 				}
 			}
-		} finally {
+		} 
+		
+		finally {
 			driver.quit();
 		}
 	}
